@@ -29,17 +29,23 @@ public class Solution {
         return result;
     }
 
+    /*
+    I think the time complexity of this is O(n) linear.
+    It may look like O(n^2) because it has nested loops.
+    The outer for loop is O(n), obviously. n = number of words in strs array
+    The inner while loop is not O(n), but a constant. This is because the while loop is dependent on the length of firstWord, which is a constant
+    Therefore the time complexity is O(c * n) = O(n)
+    */
     public static String fasterLongestCommonPrefix(String[] strs) {
         String firstWord = strs[0];
 
-        // I think this is still O(n^2) time complexity
         for (int wordIndex = 1; wordIndex < strs.length; wordIndex++) {
-            String word = strs[wordIndex];
+            String wordLookingAt = strs[wordIndex];
 
-            while(word.indexOf(firstWord) != 0) { // while firstWord is not in word
+            while(wordLookingAt.indexOf(firstWord) != 0) { // while firstWord is not in word
                 firstWord = firstWord.substring(0, firstWord.length() - 1); // Keep removing the last letter of firstWord
 
-                // Keep removing letters until there's nothing left or only common letters remain
+                // Keep removing the last letters until there's nothing left or only common letters remain
                 // Because you're removing the last letter every iteration, the only common letters remaining will be the prefix
             }
         }
@@ -48,7 +54,7 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        String[] words = {"abab", "ab", ""};
+        String[] words = {"flower" ,"flow", "flight"};
 
         System.out.println(fasterLongestCommonPrefix(words));
     }
